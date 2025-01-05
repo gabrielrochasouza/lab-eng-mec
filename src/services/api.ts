@@ -9,9 +9,8 @@ import { GraphQLClient, gql } from 'graphql-request';
 
 const graphqlToken = String(import.meta.env.VITE_GRAPHQL_TOKEN);
 
-const graphcms = new GraphQLClient(`${window.location.origin}/graphql`, {
+const graphcms = new GraphQLClient(String(import.meta.env.VITE_GRAPHQL_URL), {
     headers: {
-        contentType: 'application/json',
         authorization: graphqlToken,
     },
 });
