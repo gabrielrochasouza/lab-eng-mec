@@ -8,7 +8,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { MenuIcon, Search } from 'lucide-react';
 
 
-export default function Header() {
+export default function Header({ setOpenCommand }: { setOpenCommand: (open: boolean) => void }) {
     const { theme } = useTheme();
 
     return (
@@ -39,6 +39,7 @@ export default function Header() {
                     </div>
                     <div className='items-center flex md:hidden gap-2 text-xs font-light flex-1'>
                         <Button
+                            onClick={() => setOpenCommand(true)}
                             variant={'outline'}
                             className='px-2 m-0 min-w-[200px] h-[30px] justify-start'
                             style={{
@@ -71,6 +72,7 @@ export default function Header() {
                     </div>
                     <div className='lg:mr-4 flex gap-2 item-center'>
                         <Button
+                            onClick={() => setOpenCommand(true)}
                             variant={'outline'}
                             className='md:flex hidden px-2 m-0 min-w-[200px] h-[30px] justify-start w-4/5'
                             style={{

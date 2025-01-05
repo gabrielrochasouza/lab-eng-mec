@@ -97,3 +97,21 @@ export interface ISingleStockItemResponse {
         }
     }
 }
+
+export interface IStocksAndPosts {
+    stocks: {
+        itemTitle: string,
+        itemSlug: string,
+        id: string,
+    }[],
+    posts: {
+        id: string,
+        title: string,
+        slug: string,
+        excerpt: string,
+    }[]
+}
+
+export interface IStocksAndPostsResponse {
+    stocksAndPosts: IStocksAndPosts
+}

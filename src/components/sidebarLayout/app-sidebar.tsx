@@ -26,7 +26,14 @@ export function AppSidebar() {
 
     if (isLoading) {
         return (
-            <div className='py-8 px-4'>Loading...</div>
+            <Sidebar className='pt-8'>
+                <SidebarHeader />
+                <SidebarContent className='mt-2'>
+                    <ScrollArea>
+                        <div className='py-8 px-4'>Loading...</div>
+                    </ScrollArea>
+                </SidebarContent>
+            </Sidebar>
         );
     }
 

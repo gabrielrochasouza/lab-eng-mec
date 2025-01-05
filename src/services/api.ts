@@ -3,7 +3,8 @@ import {
     ICategoriesResponseWithImage,
     ISinglePostResponse,
     ISingleStockItemResponse,
-    IStockItemResponse
+    IStockItemResponse,
+    IStocksAndPosts,
 } from '@/interfaces';
 import { GraphQLClient, gql } from 'graphql-request';
 
@@ -100,9 +101,26 @@ const queryGetSinglePost = gql`
     }
 `;
 
+const queryGetStocksAndPosts = gql`
+    query {
+        stocks {
+            itemTitle
+            itemSlug
+            id
+        }
+        posts {
+            title
+            slug
+            id
+            excerpt
+        }
+        
+    }
+`;
+
 export const getAllStockItems = async (): Promise<IStockItemResponse> => graphcms.request(queryGetAllStockItems);
 export const getSingleStockItem = async (slug?: string): Promise<ISingleStockItemResponse> => graphcms.request(queryGetSingleStockItem, { itemSlug: slug });
 export const getAllCategoriesPosts = async (): Promise<ICategoriesResponse> => graphcms.request(queryGetAllCategoriesPosts);
 export const getSinglePost = async (slug?: string): Promise<ISinglePostResponse> => graphcms.request(queryGetSinglePost, { slug: slug });
 export const getAllCategoriesPostsAndImages = async (): Promise<ICategoriesResponseWithImage> => graphcms.request(queryGetAllCategoriesPostsAndImages);
-
+export const getStocksAndPosts = async (): Promise<IStocksAndPosts> => graphcms.request(queryGetStocksAndPosts);

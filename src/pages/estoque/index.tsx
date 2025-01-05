@@ -10,16 +10,30 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Separator } from '@radix-ui/react-separator';
+import { useLocation } from 'react-router-dom';
 
 export default function Stock () {
-    const [openDialog, setOpenDialog] = useState<boolean>(false);
-    const [selectedItem, setSelectedItem] = useState<IStockItem>({} as IStockItem);
+    const queryParams = new URLSearchParams(window.location.search);
+    const itemSlugParam = queryParams.get('item');
     const { data: stockItems, isLoading } = useQuery<IStockItemResponse, Error>({
         queryKey: ['stocks'],
         queryFn: getAllStockItems,
     });
+    const rows = stockItems?.stocks || [];
+    const selectedStock = itemSlugParam ? rows.find(({ itemSlug }) => itemSlug === itemSlugParam) || {} as IStockItem : {} as IStockItem;
+
+    const [selectedItem, setSelectedItem] = useState<IStockItem>(selectedStock as IStockItem);
+    const [openDialog, setOpenDialog] = useState<boolean>(itemSlugParam ? true : false);
+
+    const location = useLocation();
+    useEffect(() => {
+        if (itemSlugParam && selectedStock) {
+            setOpenDialog(true);
+            setSelectedItem(selectedStock);
+        }
+    }, [location.search, selectedStock]);
 
     if (isLoading) {
         return (
@@ -29,17 +43,16 @@ export default function Stock () {
         );
     }
 
-    const rows = stockItems?.stocks || [];
     const headers = [
         {
-            title: 'N° armário',
+            title: 'Armário',
             value: 'cabinetNumber',
             prefixText: 'n°',
             rowClassName: 'max-w-[60px] truncate pl-4 text-xs sm:text-base',
             headerClassName: 'max-w-[60px] truncate pl-4 text-xs sm:text-base'
         },
         {
-            title: 'N° pratilheira',
+            title: 'Pratilheira',
             value: 'shelfNumber',
             prefixText: 'n°',
             rowClassName: 'max-w-[80px] truncate text-xs sm:text-base',
@@ -67,7 +80,7 @@ export default function Stock () {
             rowClassName: 'text-end pr-4 pl-0 max-w-[30px]',
         }
     ];
-
+    console.log('renderizou');
     return (
         <Layout>
             <div className='mt-6 pt-16 px-4 text-xs'>
@@ -87,12 +100,12 @@ export default function Stock () {
                             </div>
                         )}
                         <Separator />
-                        <DialogTitle>{selectedItem.itemTitle}</DialogTitle>
+                        <DialogTitle>{selectedItem?.itemTitle}</DialogTitle>
                         <DialogDescription>
-                            <p>Descrição: {selectedItem.itemDescription || '-'}</p>
-                            <p>Armário: n° {selectedItem.cabinetNumber}</p>
-                            <p>Prateleira: n° {selectedItem.shelfNumber}</p>
-                            <p>Quantidade: {selectedItem.quantity}</p>
+                            <p>Descrição: {selectedItem?.itemDescription || '-'}</p>
+                            <p>Armário: n° {selectedItem?.cabinetNumber}</p>
+                            <p>Prateleira: n° {selectedItem?.shelfNumber}</p>
+                            <p>Quantidade: {selectedItem?.quantity}</p>
                         </DialogDescription>
                     </DialogHeader>
                 </DialogContent>
