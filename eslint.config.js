@@ -25,7 +25,8 @@ export default tseslint.config(
       ],
       indent: ["error", 4],
       semi: ["error", "always"],
-      quotes: ["error", "single"]
+      quotes: ["error", "single"],
+      'no-trailing-spaces': ['error'],
     },
   },
 )

@@ -1,7 +1,7 @@
 import Layout from '@/components/layout';
 import SidebarLayout from '@/components/sidebarLayout';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getSinglePost } from '@/services/api';
 import { ISinglePostResponse } from '@/interfaces/';
 import { useQuery } from '@tanstack/react-query';
@@ -24,7 +24,7 @@ const HtmlContent: React.FC<HtmlContentProps> = ({ htmlString }) => {
 
 export default function PostPage () {
     const { postSlugName } = useParams();
-    
+
     const { data: singlePostResponse } = useQuery<ISinglePostResponse, Error>({
         queryKey: ['post', postSlugName],
         queryFn: () => getSinglePost(postSlugName),
@@ -40,7 +40,9 @@ export default function PostPage () {
                     <Breadcrumb className='inline-block' style={{ width: 'calc(100% - 80px)' }}>
                         <BreadcrumbList className='truncate'>
                             <BreadcrumbItem className='truncate'>
-                                <BreadcrumbLink className='truncate'>Guia Rápido</BreadcrumbLink>
+                                <BreadcrumbLink className='truncate'>
+                                    <Link to={'/guia-rapido'}>Guia Rápido</Link>
+                                </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem className='truncate inline-block' style={{ width: 'calc(100% - 120px)' }}>
@@ -48,8 +50,8 @@ export default function PostPage () {
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <div style={{ width: '95%', maxHeight: '400px', margin: '20px auto', overflow: 'hidden' }}>
-                        <img src={post?.coverImage.url} alt={post?.title} />
+                    <div style={{ width: '100%', margin: '10px auto', }}>
+                        <img src={post?.coverImage.url} alt={post?.title} style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', }} />
                     </div>
                     <div className='px-6 pb-6 pt-0 markdown-content'>
                         <h1>{post?.title}</h1>

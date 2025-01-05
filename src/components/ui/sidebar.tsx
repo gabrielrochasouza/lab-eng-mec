@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { VariantProps, cva } from 'class-variance-authority';
-import { PanelLeft } from 'lucide-react';
+import { ChevronRight, PanelLeft } from 'lucide-react';
 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -562,7 +562,10 @@ const SidebarMenuButton = React.forwardRef<
                 data-active={isActive}
                 className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
                 {...props}
-            />
+            >
+                {props.children}
+                <ChevronRight className={props['aria-expanded'] ? 'transition-all rotate-90' : 'transition-all'} />
+            </Comp>
         );
 
         if (!tooltip) {

@@ -17,7 +17,7 @@ export default function MainPage () {
                 <div className='mt-20'>
                     <span>Universidade Federal Fluminense</span>
                     <h1 className='font-bold leading-tight tracking-tighter text-3xl lg:leading-[1.1]'>
-                        Laboratório de Mecânica Aplicada - Sala A-27 
+                        Laboratório de Mecânica Aplicada - Sala A-27
                     </h1>
                     <div className='max-w-2xl font-light text-foreground my-4 md:text-md'>
                         EEIMVR - ESCOLA DE ENGENHARIA INDUSTRIAL METALÚRGICA DE VOLTA REDONDA
@@ -38,24 +38,24 @@ export default function MainPage () {
                         <AccordionItem value="item-1">
                             <AccordionTrigger className='px-4'>Que tipos de ensaios é possível fazer no laboratório?</AccordionTrigger>
                             <AccordionContent className='px-4'>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente. 
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente.
                                 Sapiente quod, quae aperiam magnam odit quidem ipsum, ducimus voluptates tempore provident optio?
                             </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="item-2">
                             <AccordionTrigger className='px-4'>Quais equipamentos há no laboratório?</AccordionTrigger>
                             <AccordionContent className='px-4'>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente. 
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente.
                                 Sapiente quod, quae aperiam magnam odit quidem ipsum, ducimus voluptates tempore provident optio?
                             </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="item-3">
                             <AccordionTrigger className='px-4'>O que preciso para agendar uma visita?</AccordionTrigger>
                             <AccordionContent className='px-4'>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente. 
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente.
                                 Sapiente quod, quae aperiam magnam odit quidem ipsum, ducimus voluptates tempore provident optio?
                             </AccordionContent>
                         </AccordionItem>

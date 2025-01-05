@@ -11,18 +11,24 @@ import {
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronRight, BookTextIcon } from 'lucide-react';
+import { BookTextIcon } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ICategoriesResponse, IPostCategories } from '@/interfaces';
 import { getAllCategoriesPosts } from '@/services/api';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-  
+
 export function AppSidebar() {
-    const { data: categoriesResponse } = useQuery<ICategoriesResponse, Error>({
+    const { data: categoriesResponse, isLoading } = useQuery<ICategoriesResponse, Error>({
         queryKey: ['postCategories'],
         queryFn: getAllCategoriesPosts,
     });
+
+    if (isLoading) {
+        return (
+            <div className='py-8 px-4'>Loading...</div>
+        );
+    }
 
     const postCategories = categoriesResponse?.postCategories || [] as IPostCategories[];
 
@@ -31,7 +37,7 @@ export function AppSidebar() {
             <SidebarHeader />
             <SidebarContent className='mt-2'>
                 <ScrollArea>
-                    {postCategories.map(({categoryName, id, post, categorySlugName}) => (
+                    {postCategories.map(({categoryName, id, post }) => (
                         <SidebarMenu key={id}>
                             <Collapsible defaultOpen className="group/collapsible px-2">
                                 <SidebarMenuItem>
@@ -41,7 +47,6 @@ export function AppSidebar() {
                                                 <BookTextIcon size={12} />
                                                 {categoryName}
                                             </div>
-                                            <ChevronRight />
                                         </SidebarMenuButton>
                                     </CollapsibleTrigger>
                                     {/* ============ Posts ============ */}
@@ -49,7 +54,7 @@ export function AppSidebar() {
                                         {post?.length && (
                                             <SidebarMenuSub className='text-[12px] font-light'>
                                                 {post?.map(({id, title, slug}) => (
-                                                    <Link key={id} to={`/guia-rapido/${categorySlugName}/${slug}`}>
+                                                    <Link key={id} to={`/guia-rapido/${slug}`}>
                                                         <SidebarMenuSubItem className='cursor-pointer py-2'>{title}</SidebarMenuSubItem>
                                                     </Link>
                                                 ))}
@@ -67,4 +72,3 @@ export function AppSidebar() {
         </Sidebar>
     );
 }
-  

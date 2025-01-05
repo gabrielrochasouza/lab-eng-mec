@@ -1,31 +1,4 @@
-'use client';
-
-import * as React from 'react';
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from '@tanstack/react-table';
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     Table,
     TableBody,
@@ -34,261 +7,133 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { EyeIcon, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { useState } from 'react';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { IDatatable } from '@/interfaces';
 
-const data: Payment[] = [
-    {
-        id: 'm5gr84i9',
-        amount: 316,
-        status: 'success',
-        email: 'ken99@yahoo.com',
-    },
-    {
-        id: '3u1reuv4',
-        amount: 242,
-        status: 'success',
-        email: 'Abe45@gmail.com',
-    },
-    {
-        id: 'derv1ws0',
-        amount: 837,
-        status: 'processing',
-        email: 'Monserrat44@gmail.com',
-    },
-    {
-        id: '5kma53ae',
-        amount: 874,
-        status: 'success',
-        email: 'Silas22@gmail.com',
-    },
-    {
-        id: 'bhqecj4p',
-        amount: 721,
-        status: 'failed',
-        email: 'carmella@hotmail.com',
-    },
-];
+const Datatable = ({ rows, headers, tableName }: IDatatable) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [filteredRows, setFilteredRows] = useState<any>(rows);
 
-export type Payment = {
-  id: string
-  amount: number
-  status: 'pending' | 'processing' | 'success' | 'failed'
-  email: string
-}
+    const filterRows = (input: string) => {
+        const filtered = rows.filter((row: any) => {
+            let result = false;
+            Object.values(row).forEach((val) => {
+                if (typeof val === 'string' && String(val).toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
+                    result = true;
+                }
+            });
 
-export const columns: ColumnDef<Payment>[] = [
-    {
-        id: 'select',
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: 'status',
-        header: 'Status',
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue('status')}</div>
-        ),
-    },
-    {
-        accessorKey: 'email',
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                >
-          Email
-                    <ArrowUpDown />
-                </Button>
-            );
-        },
-        cell: ({ row }) => <div className="lowercase">{row.getValue('email')}</div>,
-    },
-    {
-        accessorKey: 'amount',
-        header: () => <div className="text-right">Amount</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue('amount'));
-
-            // Format the amount as a dollar amount
-            const formatted = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            }).format(amount);
-
-            return <div className="text-right font-medium">{formatted}</div>;
-        },
-    },
-    {
-        id: 'actions',
-        enableHiding: false,
-        cell: ({ row }) => {
-            const payment = row.original;
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(payment.id)}
-                        >
-              Copy payment ID
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
-    },
-];
-
-export function DataTableDemo() {
-    const [sorting, setSorting] = React.useState<SortingState>([]);
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-        []
-    );
-    const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-    const [rowSelection, setRowSelection] = React.useState({});
-
-    const table = useReactTable({
-        data,
-        columns,
-        onSortingChange: setSorting,
-        onColumnFiltersChange: setColumnFilters,
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
-        state: {
-            sorting,
-            columnFilters,
-            columnVisibility,
-            rowSelection,
-        },
-    });
+            return result;
+        });
+        setFilteredRows(filtered);
+    };
 
     return (
-        <div className="w-full text-xs">
-            <div className="flex items-center py-4 text-xs">
-                <Input
-                    placeholder="Filter emails..."
-                    value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-                    onChange={(event) =>
-                        table.getColumn('email')?.setFilterValue(event.target.value)
-                    }
-                    className="max-w-sm"
-                />
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        {table
-                            .getAllColumns()
-                            .filter((column) => column.getCanHide())
-                            .map((column) => {
-                                return (
-                                    <DropdownMenuCheckboxItem
-                                        key={column.id}
-                                        className="capitalize"
-                                        checked={column.getIsVisible()}
-                                        onCheckedChange={(value) =>
-                                            column.toggleVisibility(!!value)
-                                        }
-                                    >
-                                        {column.id}
-                                    </DropdownMenuCheckboxItem>
-                                );
-                            })}
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
-            <div className="rounded-md border">
-                <Table>
+        <>
+            <Card className='mb-4'>
+                {/* Parte do filtro */}
+                <div className='mx-3 my-4 flex justify-between items-center gap-4'>
+                    <h1 className='text-2xl sm:text-1xl font-bold'>{tableName}</h1>
+                    <Input placeholder='Procurar...' className='max-w-[240px] text-xs sm:text-base' onChange={(event) => filterRows(String(event.target.value))} />
+                </div>
+                {/* Parte da tabela */}
+                <Table className='p-0'>
+                    {/* HEADER */}
                     <TableHeader>
-                        {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
-                                    return (
-                                        <TableHead key={header.id}>
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
-                                        </TableHead>
-                                    );
-                                })}
-                            </TableRow>
-                        ))}
+                        <TableRow>
+                            {headers.map(({headerClassName, title}, headerIndex) => (
+                                <TableHead key={headerIndex} className={`pt-2 pb-2 pl-2 pr-0 ${headerClassName}`}>{title}</TableHead>
+                            ))}
+                        </TableRow>
                     </TableHeader>
+                    {/* BODY */}
                     <TableBody>
-                        {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    data-state={row.getIsSelected() && 'selected'}
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id} className='text-xs'>
-                                            {flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )}
-                                        </TableCell>
+                        {filteredRows?.length ? (
+                            filteredRows.slice(itemsPerPage * (currentPage - 1), itemsPerPage * currentPage).map((row: any, rowIndex: number) => (
+                                <TableRow key={`TableRow-${rowIndex}`} className='p-4'>
+                                    {headers.map(({value, rowClassName, prefixText, action}, headerIndex) => (
+                                        value === 'action' && action ? (
+                                            // ACTION
+                                            <TableCell
+                                                key={`${value}-${rowIndex}-${headerIndex}`}
+                                                className={`pt-2 pb-2 pl-2 pr-0 ${rowClassName}`}
+                                            >
+                                                <Button onClick={() => action(row)} className='m-0 p-0 h-6 w-6 ' variant={'ghost'}>
+                                                    <EyeIcon className='m-2' />
+                                                </Button>
+                                            </TableCell>
+                                        ) : (
+                                            // CÉLULA NORMAL
+                                            <TableCell
+                                                key={`${value}-${rowIndex}-${headerIndex}`}
+                                                className={`pt-2 pb-2 pl-2 pr-0 ${rowClassName}`}
+                                            >
+                                                {prefixText}{row[value]}
+                                            </TableCell>
+                                        )
                                     ))}
                                 </TableRow>
                             ))
-                        ) : (
-                            <TableRow>
-                                <TableCell
-                                    colSpan={columns.length}
-                                    className="h-24 text-center text-xs"
-                                >
-                  No results.
-                                </TableCell>
-                            </TableRow>
-                        )}
+                        ): (<div className='p-4'>Lista vazia...</div>)}
                     </TableBody>
                 </Table>
-            </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of{' '}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                <Separator className='m-0' />
+                {/* Parte da paginação da tabela */}
+                <div className='flex justify-between items-center my-0 p-4'>
+                    <div className='flex items-center gap-4'>
+                        <div>
+                            {currentPage} de {Math.ceil(filteredRows.length / itemsPerPage) || 1} páginas
+                        </div>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                        {/* Select de ítens por página */}
+                        <Select onValueChange={(value) => setItemsPerPage(Number(value))} value={String(itemsPerPage)}>
+                            <SelectTrigger className="w-[80px]">
+                                <SelectValue placeholder="Ítens por página" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="5">5</SelectItem>
+                                <SelectItem value="10">10</SelectItem>
+                                <SelectItem value="15">15</SelectItem>
+                                <SelectItem value="20">20</SelectItem>
+                                <SelectItem value="25">25</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        {/* Botões de navegação entre páginas */}
+                        <Button
+                            variant='outline'
+                            className='p-2'
+                            onClick={() => setCurrentPage(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            <ChevronLeft />
+                        </Button>
+                        <Button
+                            variant='outline'
+                            className='p-2'
+                            onClick={() => setCurrentPage(currentPage + 1)}
+                            disabled={currentPage === (Math.ceil(filteredRows.length / itemsPerPage) || 1)}
+                        >
+                            <ChevronRight />
+                        </Button>
+                    </div>
                 </div>
-                <div className="space-x-2">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-            Previous
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-            Next
-                    </Button>
-                </div>
-            </div>
-        </div>
+            </Card>
+        </>
     );
-}
+};
+
+export default Datatable;
