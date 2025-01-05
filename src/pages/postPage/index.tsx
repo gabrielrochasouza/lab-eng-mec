@@ -13,6 +13,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import ImageWithLoader from '@/components/imageWithLoader';
 
 interface HtmlContentProps {
     htmlString: string;
@@ -51,7 +52,12 @@ export default function PostPage () {
                         </BreadcrumbList>
                     </Breadcrumb>
                     <div style={{ width: '100%', margin: '10px auto', }}>
-                        <img src={post?.coverImage.url} alt={post?.title} style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', }} />
+                        <ImageWithLoader
+                            src={post?.coverImage.url}
+                            alt={post?.title}
+                            sizeClassName='w-full max-h-[400px]'
+                            style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', }}
+                        />
                     </div>
                     <div className='px-6 pb-6 pt-0 markdown-content'>
                         <h1>{post?.title}</h1>

@@ -1,3 +1,4 @@
+import ImageWithLoader from '@/components/imageWithLoader';
 import Layout from '@/components/layout';
 import SidebarLayout from '@/components/sidebarLayout';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
@@ -42,9 +43,10 @@ export default function QuickGuide () {
                                                 {coverImage?.url && (
                                                     <div className='hidden sm:block' style={{ maxWidth: '140px', minWidth: '140px', width: '140px', height: '100%', minHeight: '80px' }}>
                                                         <Link to={`/guia-rapido/${slug}`}>
-                                                            <img
+                                                            <ImageWithLoader
                                                                 src={coverImage?.url}
                                                                 alt={title}
+                                                                sizeClassName='min-w-[140px] min-h-[80px]'
                                                                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
                                                             />
                                                         </Link>

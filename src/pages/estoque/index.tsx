@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Separator } from '@radix-ui/react-separator';
 import { useLocation } from 'react-router-dom';
+import ImageWithLoader from '@/components/imageWithLoader';
 
 export default function Stock () {
     const queryParams = new URLSearchParams(window.location.search);
@@ -80,7 +81,6 @@ export default function Stock () {
             rowClassName: 'text-end pr-4 pl-0 max-w-[30px]',
         }
     ];
-    console.log('renderizou');
     return (
         <Layout>
             <div className='mt-6 pt-16 px-4 text-xs'>
@@ -91,11 +91,12 @@ export default function Stock () {
                     <DialogHeader>
                         {selectedItem?.itemPicture?.url && (
                             <div className='p-0'>
-                                <img
+                                <ImageWithLoader
                                     src={selectedItem?.itemPicture?.url}
                                     alt={selectedItem?.itemTitle}
-                                    className='w-full max-h-[250px] rounded'
-                                    style={{ objectFit: 'cover' }}
+                                    className='w-full max-h-[250px] min-h-[250px] rounded'
+                                    sizeClassName='w-full max-h-[250px] rounded'
+                                    style={{ objectFit: 'cover', height: '250px' }}
                                 />
                             </div>
                         )}
