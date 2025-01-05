@@ -16,7 +16,7 @@ export default function Router() {
                 <Route path="/estoque" element={<Stock />} />
                 <Route path="/guia-rapido" element={<QuickGuide />} />
                 <Route path="/guia-rapido/:postSlugName" element={<PostPage />} />
-                <Route path="/*" element={<MainPage />} />
+                {/* <Route path="/*" element={<MainPage />} /> */}
             </Routes>
         </BrowserRouter>
     );
