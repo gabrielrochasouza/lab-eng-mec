@@ -14,6 +14,7 @@ import {
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import ImageWithLoader from '@/components/imageWithLoader';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface HtmlContentProps {
     htmlString: string;
@@ -26,11 +27,45 @@ const HtmlContent: React.FC<HtmlContentProps> = ({ htmlString }) => {
 export default function PostPage () {
     const { postSlugName } = useParams();
 
-    const { data: singlePostResponse } = useQuery<ISinglePostResponse, Error>({
+    const { data: singlePostResponse, isLoading } = useQuery<ISinglePostResponse, Error>({
         queryKey: ['post', postSlugName],
         queryFn: () => getSinglePost(postSlugName),
         enabled: !!postSlugName,
     });
+
+    if (isLoading) {
+        return (
+            <Layout>
+                <ScrollArea className="mt-12" style={{ height: 'calc(100vh - 48px)' }}>
+                    <SidebarLayout>
+                        <Breadcrumb className='inline-block' style={{ width: 'calc(100% - 80px)' }}>
+                            <BreadcrumbList className='truncate'>
+                                <BreadcrumbItem className='truncate'>
+                                    <BreadcrumbLink className='truncate'>
+                                        <Link to={'/guia-rapido'}>Guia Rápido</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                            </BreadcrumbList>
+                        </Breadcrumb>
+                        <div style={{ width: '100%', margin: '10px auto', }}>
+                            <Skeleton style={{ width: '100%', maxHeight: '300px', height: '300px', }} />
+                        </div>
+                        <div className='px-6 pb-6 pt-0 markdown-content'>
+                            <h1>
+                                <Skeleton style={{ width: '100%', height: '36px' }} />
+                            </h1>
+                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
+                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
+                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
+                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
+                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
+
+                        </div>
+                    </SidebarLayout>
+                </ScrollArea>
+            </Layout>
+        );
+    }
 
     const post = singlePostResponse?.post;
 

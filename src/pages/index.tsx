@@ -23,7 +23,7 @@ export default function MainPage () {
                         EEIMVR - ESCOLA DE ENGENHARIA INDUSTRIAL METALÚRGICA DE VOLTA REDONDA
                     </div>
                     <div className='flex gap-2'>
-                        <Button variant='default'>Agendar Visita</Button>
+                        {/* <Button variant='default'>Agendar Visita</Button> */}
                         <Link to='/guia-rapido'>
                             <Button variant='outline'>Ver Guia Rápido</Button>
                         </Link>
@@ -38,25 +38,19 @@ export default function MainPage () {
                         <AccordionItem value="item-1">
                             <AccordionTrigger className='px-4'>Que tipos de ensaios é possível fazer no laboratório?</AccordionTrigger>
                             <AccordionContent className='px-4'>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente.
-                                Sapiente quod, quae aperiam magnam odit quidem ipsum, ducimus voluptates tempore provident optio?
+                                Ensaios de tração e compressão.
                             </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="item-2">
                             <AccordionTrigger className='px-4'>Quais equipamentos há no laboratório?</AccordionTrigger>
                             <AccordionContent className='px-4'>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente.
-                                Sapiente quod, quae aperiam magnam odit quidem ipsum, ducimus voluptates tempore provident optio?
+                                Há uma CNC fanuc 0i ROMI D800, uma Máquina Universal de Ensaios Mecânicos EMIC DL 2000 de 20KN e Maquina Universal De Ensaios 600KN Emic
                             </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="item-3">
                             <AccordionTrigger className='px-4'>O que preciso para agendar uma visita?</AccordionTrigger>
                             <AccordionContent className='px-4'>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Accusamus quo accusantium ipsam consectetur tempore explicabo rerum sapiente.
-                                Sapiente quod, quae aperiam magnam odit quidem ipsum, ducimus voluptates tempore provident optio?
+                                É necessário entrar em contato com o técnico responsável do laboratório de mecânica aplicada.
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
