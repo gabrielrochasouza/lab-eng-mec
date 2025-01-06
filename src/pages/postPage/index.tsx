@@ -46,7 +46,7 @@ export default function PostPage () {
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
-                            <BreadcrumbItem className='truncate inline-block' style={{ width: 'calc(100% - 120px)' }}>
+                            <BreadcrumbItem className='truncate inline-block' style={{ width: 'calc(100% - 150px)' }}>
                                 <BreadcrumbPage className='truncate'>{post?.title}</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
@@ -55,8 +55,8 @@ export default function PostPage () {
                         <ImageWithLoader
                             src={post?.coverImage.url}
                             alt={post?.title}
-                            sizeClassName='w-full max-h-[220px]'
-                            style={{ width: '100%', maxHeight: '220px', objectFit: 'cover', }}
+                            sizeClassName='w-full max-h-[300px]'
+                            style={{ width: '100%', maxHeight: '300px', objectFit: 'cover', }}
                         />
                     </div>
                     <div className='px-6 pb-6 pt-0 markdown-content'>
