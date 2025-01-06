@@ -6,7 +6,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         <SidebarProvider>
             <AppSidebar />
             <main className='flex-1'>
-                <SidebarTrigger className='m-2' style={{ position: 'sticky', top: '10px', background: 'var(--code-background)' }} />
+                <SidebarTrigger className='m-2' style={{ position: 'sticky', top: '10px', background: 'var(--code-background)', zIndex: '20' }} />
                 {children}
             </main>
         </SidebarProvider>

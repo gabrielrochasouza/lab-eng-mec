@@ -153,6 +153,8 @@
 .markdown-content img {
     max-width: 100%;
     height: auto;
+    margin: 20px auto;
+    text-align: center;
 }
 
 .markdown-content hr {

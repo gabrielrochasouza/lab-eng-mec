@@ -46,7 +46,8 @@ export default function QuickGuide () {
                                                             <ImageWithLoader
                                                                 src={coverImage?.url}
                                                                 alt={title}
-                                                                sizeClassName='min-w-[140px] min-h-[80px]'
+                                                                sizeClassName='min-w-[140px] min-h-[80px] max-h-[80px]'
+                                                                className='max-h-[80px]'
                                                                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
                                                             />
                                                         </Link>
