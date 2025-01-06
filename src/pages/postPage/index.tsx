@@ -52,14 +52,33 @@ export default function PostPage () {
                         </div>
                         <div className='px-6 pb-6 pt-0 markdown-content'>
                             <h1>
-                                <Skeleton style={{ width: '100%', height: '36px' }} />
+                                <Skeleton style={{ width: '60%', height: '30px' }} />
                             </h1>
-                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
-                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
-                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
-                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
-                            <Skeleton className='my-2' style={{ width: '100%', height: '60px' }} />
-
+                            <div className='my-3'>
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '70%', height: '16px' }} />
+                            </div>
+                            <div className='my-3'>
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '20%', height: '16px' }} />
+                            </div>
+                            <div className='my-3'>
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '40%', height: '16px' }} />
+                            </div>
+                            <div className='my-3'>
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-1' style={{ width: '10%', height: '16px' }} />
+                            </div>
                         </div>
                     </SidebarLayout>
                 </ScrollArea>
