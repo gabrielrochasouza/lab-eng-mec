@@ -109,8 +109,9 @@ export default function PostPage () {
                         <ImageWithLoader
                             src={post?.coverImage.url}
                             alt={post?.title}
-                            sizeClassName='w-full max-h-[300px]'
-                            style={{ width: '100%', maxHeight: '300px', objectFit: 'cover', }}
+                            sizeClassName='w-full max-h-[300px] xl:max-h-[500px]'
+                            className='max-h-[300px] xl:max-h-[500px]'
+                            style={{ width: '100%', objectFit: 'cover', }}
                         />
                     </div>
                     <div className='px-6 pb-6 pt-0 markdown-content'>

@@ -14,7 +14,7 @@ export default function Header({ setOpenCommand }: { setOpenCommand: (open: bool
     return (
         <>
             <div className='fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-30 mx-auto'>
-                <nav className='h-12 flex items-center justify-between px-4'>
+                <nav className='h-12 flex items-center justify-between px-4 max-w-screen-2xl mx-auto'>
                     <div className='items-center md:hidden gap-2 text-xs font-light'>
                         <Drawer>
                             <DrawerTrigger asChild>
@@ -23,7 +23,7 @@ export default function Header({ setOpenCommand }: { setOpenCommand: (open: bool
                                 </Button>
                             </DrawerTrigger>
                             <DrawerContent className='h-5/6'>
-                                <div className="mx-auto w-full max-w-sm text-center text-3xl h-full flex gap-20 font-bold" style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                                <div className="mx-auto w-full max-w-sm text-center text-3xl h-full flex gap-20" style={{ flexDirection: 'column', justifyContent: 'center' }}>
                                     <div>
                                         <Link to={'/'}>Home</Link>
                                     </div>

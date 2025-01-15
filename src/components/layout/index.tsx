@@ -25,14 +25,14 @@ export default function Layout ({children}: { children: ReactNode}) {
     const posts = stocksAndPosts?.posts;
     const stocks = stocksAndPosts?.stocks;
     return (
-        <main className='mx-auto'>
+        <main className='mx-auto max-w-screen-2xl'>
             <Header setOpenCommand={setOpenCommand} />
             <div className='min-h-80'>
                 {children}
             </div>
             <CommandDialog open={openCommand} onOpenChange={(open) => setOpenCommand(open)} modal>
                 <CommandInput placeholder="Digite a sua busca"/>
-                <ScrollArea>
+                <ScrollArea className='w-full h-full'>
                     <CommandList>
                         <CommandEmpty>Nada encontrado.</CommandEmpty>
                         <CommandGroup heading="Guia">

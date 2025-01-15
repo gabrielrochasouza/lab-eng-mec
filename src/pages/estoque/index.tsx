@@ -94,9 +94,9 @@ export default function Stock () {
                                 <ImageWithLoader
                                     src={selectedItem?.itemPicture?.url}
                                     alt={selectedItem?.itemTitle}
-                                    className='w-full max-h-[250px] min-h-[250px] rounded'
-                                    sizeClassName='w-full max-h-[250px] rounded'
-                                    style={{ objectFit: 'cover', height: '250px' }}
+                                    className='w-full max-h-96 min-h-80 rounded'
+                                    sizeClassName='w-full max-h-96 min-h-80 rounded'
+                                    style={{ objectFit: 'cover' }}
                                 />
                             </div>
                         )}

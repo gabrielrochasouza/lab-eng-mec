@@ -26,7 +26,7 @@ export function AppSidebar() {
 
     if (isLoading) {
         return (
-            <Sidebar className='pt-8'>
+            <Sidebar className='pt-0'>
                 <SidebarHeader />
                 <SidebarContent className='mt-2'>
                     <ScrollArea>
@@ -40,7 +40,7 @@ export function AppSidebar() {
     const postCategories = categoriesResponse?.postCategories || [] as IPostCategories[];
 
     return (
-        <Sidebar className='pt-8'>
+        <Sidebar className='pt-0'>
             <SidebarHeader />
             <SidebarContent className='mt-2'>
                 <ScrollArea>
