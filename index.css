@@ -39,6 +39,9 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
     --code-background: #eee;
     --input-background: #ddd;
+    --primary-text: #000;
+    --white-background: #eee;
+    --primary-background: #fff;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -76,6 +79,9 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
     --code-background: #111;
     --input-background: #222;
+    --primary-text: #fff;
+    --white-background: #ddd;
+    --primary-background: #000;
   }
 }
 @layer base {
@@ -173,4 +179,30 @@
     border: none;
     border-top: 1px solid #ccc;
     margin: 2em 0;
+}
+
+.custom-scroll {
+  overflow-y: auto; /* Permite scroll vertical */
+  scrollbar-width: 4px; /* Remove a barra de rolagem (Chrome, Edge, etc.) */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: var(--primary-background); /* Cor do fundo do trilho */
+}
+
+.custom-scroll:hover {
+  scrollbar-width: 4px; /* Mostra a barra de rolagem ao passar o mouse */
+  -ms-overflow-style: auto; /* Mostra a barra de rolagem (IE, Edge) */
+}
+
+.custom-scroll:hover::-webkit-scrollbar, .custom-scroll:hover::-webkit-scrollbar-thumb {
+  display: block; /* Mostra a barra de rolagem (Safari, Chrome) */
+  background-color: #0070f3;
+  width: 4px;
+  border-radius: 4px;
 }

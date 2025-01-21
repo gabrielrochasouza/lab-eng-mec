@@ -9,13 +9,60 @@ import {
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SendHorizonal } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { useChat } from 'ai/react';
+import { cn } from '@/lib/utils';
+import ReactMarkdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github.css';
+import { useEffect, useRef } from 'react';
+import { Textarea } from '@/components/ui/textarea';
 
 const Chat = () => {
+    const { messages, input, handleInputChange, handleSubmit, setInput } = useChat({
+        api: String(import.meta.env.VITE_CHATBOT_URL)
+    });
+
+    const scrollContentRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToBottom = () => {
+        if (scrollContentRef.current) {
+            console.log(scrollContentRef.current);
+            scrollContentRef.current.scrollTo({
+                top: scrollContentRef.current.scrollHeight,
+                behavior: 'smooth',
+            });
+        }
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.keyCode == 13 && e.shiftKey == false) {
+            e.preventDefault();
+            handleSubmit();
+        }
+    };
+    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        handleSubmit();
+    };
+
+    const clickExample = (text: string) => {
+        setInput(text);
+        handleSubmit();
+    };
+
+    const examples = [
+        'O que é usinagem?',
+        'Quais etapas para ligar a máquina CNC?',
+        'Para o que serve o teste de tração uniaxial?',
+    ];
+
     return (
         <>
             <Dialog>
@@ -31,27 +78,58 @@ const Chat = () => {
                                 <DialogTitle className='pb-0 inline-block'>Faça uma pergunta</DialogTitle>
                             </DialogHeader>
                             <Separator />
-                            <ScrollArea className='py-0'>
+                            <div ref={scrollContentRef} className='py-0 my-0 overflow-auto custom-scroll'>
                                 <CardContent className='min-h-[200px] max-h-[420px] p-4'>
-                                    <div className='flex gap-2 flex-start mb-2'>
-                                        <Avatar className='border-4 border-solid w-12 h-12 bg-white'>
-                                            <AvatarFallback>U</AvatarFallback>
-                                            <AvatarImage style={{ objectFit: 'contain' }} src={UffLogo} alt='Logo da Uff'/>
-                                        </Avatar>
-                                        <div className='rounded-[12px] p-4' style={{ backgroundColor: 'var(--code-background)' }}>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
-                                            temporibus possimus? Aspernatur exercitationem veritatis dolorem ab,
-                                            sint rerum voluptatem ex doloremque. Sed possimus tempora unde adipisci
-                                            ipsam, accusantium dolores! Praesentium!
-                                        </div>
-                                    </div>
+                                    {messages.length ? (
+                                        messages.map(({ content, role, id }) => (
+                                            <div
+                                                key={id}
+                                                className={cn('flex gap-2 mb-4', role !== 'user' ? 'justify-start' : 'justify-end' )}
+                                                style={{ backgroundColor: role === 'user' ? '' : '', color: role === 'user' ? '' : '' }}
+                                            >
+                                                {role !== 'user' && (
+                                                    <Avatar className='border-4 border-solid w-12 h-12 bg-white'>
+                                                        <AvatarFallback>U</AvatarFallback>
+                                                        <AvatarImage style={{ objectFit: 'contain' }} src={UffLogo} alt='Logo da Uff'/>
+                                                    </Avatar>
+                                                )}
+                                                <div
+                                                    className='rounded-[12px] p-4'
+                                                    style={{
+                                                        backgroundColor: role !== 'user' ? 'var(--code-background)' : 'var(--white-background)',
+                                                        color: role !== 'user' ? 'var(--primary-text)' : '#000',
+                                                        maxWidth: '450px',
+                                                    }}
+                                                >
+                                                    <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{content}</ReactMarkdown>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <>
+                                            <div>
+                                                <p className='text-1xl font-bold mb-2'>Exemplos:</p>
+                                                { examples.map(example => (
+                                                    <Button onClick={() => clickExample(example)} variant='outline' className='w-full py-5 my-1'>{example}</Button>
+                                                )) }
+                                            </div>
+                                        </>
+                                    )
+                                    }
                                 </CardContent>
-                            </ScrollArea>
+                            </div>
                             <Separator />
-                            <form>
+                            <form onSubmit={onFormSubmit}>
                                 <CardFooter className='gap-2 p-4'>
-                                    <Input placeholder='Faça uma pergunta a IA' />
-                                    <Button><SendHorizonal /></Button>
+                                    <Textarea
+                                        className='resize-none min-h-[40px]'
+                                        placeholder='Faça uma pergunta a IA'
+                                        value={input}
+                                        rows={1}
+                                        onKeyDown={onEnterPress}
+                                        onChange={handleInputChange}
+                                    />
+                                    <Button type='submit'><SendHorizonal /></Button>
                                 </CardFooter>
                             </form>
                         </Card>
