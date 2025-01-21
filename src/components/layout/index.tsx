@@ -37,7 +37,7 @@ export default function Layout ({children}: { children: ReactNode}) {
                         <CommandEmpty>Nada encontrado.</CommandEmpty>
                         <CommandGroup heading="Guia">
                             {posts?.map(({ title, slug, id }) => (
-                                <Link to={`/guia-rapido/${slug}`}>
+                                <Link key={`guia-rapido-${id}`} to={`/guia-rapido/${slug}`}>
                                     <CommandItem key={id}>
                                         <span>{title}</span>
                                     </CommandItem>
@@ -47,7 +47,7 @@ export default function Layout ({children}: { children: ReactNode}) {
                         <CommandSeparator />
                         <CommandGroup heading="Inventário">
                             {stocks?.map(({ itemTitle, itemSlug, id }) => (
-                                <Link to={`/estoque?item=${itemSlug}`}>
+                                <Link key={`estoque-${id}`} to={`/estoque?item=${itemSlug}`}>
                                     <CommandItem key={id}>
                                         <span>{itemTitle}</span>
                                     </CommandItem>

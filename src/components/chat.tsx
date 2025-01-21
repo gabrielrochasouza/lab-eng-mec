@@ -10,7 +10,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { SendHorizonal } from 'lucide-react';
+import { SendHorizonal, LoaderCircle } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useChat } from 'ai/react';
 import { cn } from '@/lib/utils';
@@ -21,7 +21,7 @@ import { useEffect, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 
 const Chat = () => {
-    const { messages, input, handleInputChange, handleSubmit, setInput } = useChat({
+    const { messages, input, handleInputChange, handleSubmit, setInput, isLoading } = useChat({
         api: String(import.meta.env.VITE_CHATBOT_URL)
     });
 
@@ -42,19 +42,23 @@ const Chat = () => {
     }, [messages]);
 
     const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if(e.keyCode == 13 && e.shiftKey == false) {
+        if(e.keyCode == 13 && e.shiftKey == false && !isLoading) {
             e.preventDefault();
             handleSubmit();
         }
     };
     const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        handleSubmit();
+        if (!isLoading) {
+            e.preventDefault();
+            handleSubmit();
+        }
     };
 
     const clickExample = (text: string) => {
-        setInput(text);
-        handleSubmit();
+        if (!isLoading) {
+            setInput(text);
+            handleSubmit();
+        }
     };
 
     const examples = [
@@ -88,13 +92,13 @@ const Chat = () => {
                                                 style={{ backgroundColor: role === 'user' ? '' : '', color: role === 'user' ? '' : '' }}
                                             >
                                                 {role !== 'user' && (
-                                                    <Avatar className='border-4 border-solid w-12 h-12 bg-white'>
+                                                    <Avatar className='border-4 border-solid w-12 h-12 bg-white border-white'>
                                                         <AvatarFallback>U</AvatarFallback>
                                                         <AvatarImage style={{ objectFit: 'contain' }} src={UffLogo} alt='Logo da Uff'/>
                                                     </Avatar>
                                                 )}
                                                 <div
-                                                    className='rounded-[12px] p-4'
+                                                    className='rounded-[12px] p-4 markdown-content'
                                                     style={{
                                                         backgroundColor: role !== 'user' ? 'var(--code-background)' : 'var(--white-background)',
                                                         color: role !== 'user' ? 'var(--primary-text)' : '#000',
@@ -109,8 +113,8 @@ const Chat = () => {
                                         <>
                                             <div>
                                                 <p className='text-1xl font-bold mb-2'>Exemplos:</p>
-                                                { examples.map(example => (
-                                                    <Button onClick={() => clickExample(example)} variant='outline' className='w-full py-5 my-1'>{example}</Button>
+                                                { examples.map((example, index) => (
+                                                    <Button key={index} onClick={() => clickExample(example)} variant='outline' className='w-full py-5 my-1'>{example}</Button>
                                                 )) }
                                             </div>
                                         </>
@@ -129,7 +133,9 @@ const Chat = () => {
                                         onKeyDown={onEnterPress}
                                         onChange={handleInputChange}
                                     />
-                                    <Button type='submit'><SendHorizonal /></Button>
+                                    <Button disabled={isLoading} type='submit'>
+                                        {isLoading ? <LoaderCircle className='animate-spin' /> : <SendHorizonal />}
+                                    </Button>
                                 </CardFooter>
                             </form>
                         </Card>

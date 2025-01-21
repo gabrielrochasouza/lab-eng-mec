@@ -118,6 +118,20 @@ const queryGetStocksAndPosts = gql`
     }
 `;
 
+export interface AliveStatusResponse {
+    alive: boolean;
+}
+
+export const fetchAliveStatus = async (): Promise<AliveStatusResponse> => {
+    const response = await fetch(`${import.meta.env.VITE_CHATBOT_URL}alive`);
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+};
+
 export const getAllStockItems = async (): Promise<IStockItemResponse> => graphcms.request(queryGetAllStockItems);
 export const getSingleStockItem = async (slug?: string): Promise<ISingleStockItemResponse> => graphcms.request(queryGetSingleStockItem, { itemSlug: slug });
 export const getAllCategoriesPosts = async (): Promise<ICategoriesResponse> => graphcms.request(queryGetAllCategoriesPosts);

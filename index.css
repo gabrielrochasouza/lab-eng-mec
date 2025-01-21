@@ -40,7 +40,7 @@
     --code-background: #eee;
     --input-background: #ddd;
     --primary-text: #000;
-    --white-background: #eee;
+    --white-background: #f1f1f1;
     --primary-background: #fff;
   }
   .dark {
@@ -202,7 +202,7 @@
 
 .custom-scroll:hover::-webkit-scrollbar, .custom-scroll:hover::-webkit-scrollbar-thumb {
   display: block; /* Mostra a barra de rolagem (Safari, Chrome) */
-  background-color: #0070f3;
+  background-color: var(--primary-text);
   width: 4px;
   border-radius: 4px;
 }
