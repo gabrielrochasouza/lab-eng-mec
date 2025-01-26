@@ -13,7 +13,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import ImageWithLoader from '@/components/imageWithLoader';
+// import ImageWithLoader from '@/components/imageWithLoader';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface HtmlContentProps {
@@ -47,37 +47,37 @@ export default function PostPage () {
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
-                        <div style={{ width: '100%', margin: '10px auto', }}>
+                        {/* <div style={{ width: '100%', margin: '10px auto', }}>
                             <Skeleton style={{ width: '100%', maxHeight: '300px', height: '300px', }} />
-                        </div>
-                        <div className='px-6 pb-6 pt-0 markdown-content'>
-                            <h1>
-                                <Skeleton style={{ width: '60%', height: '30px' }} />
-                            </h1>
-                            <div className='my-3'>
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '70%', height: '16px' }} />
+                        </div> */}
+                        <div className='mt-4 px-6 pb-6 pt-0 markdown-content'>
+                            <div>
+                                <Skeleton style={{ width: '60%', height: '16px' }} />
                             </div>
                             <div className='my-3'>
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '20%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '70%', height: '16px' }} />
                             </div>
                             <div className='my-3'>
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '40%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '20%', height: '16px' }} />
                             </div>
                             <div className='my-3'>
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '100%', height: '16px' }} />
-                                <Skeleton className='my-1' style={{ width: '10%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '40%', height: '16px' }} />
+                            </div>
+                            <div className='my-3'>
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '100%', height: '16px' }} />
+                                <Skeleton className='my-2' style={{ width: '10%', height: '16px' }} />
                             </div>
                         </div>
                     </SidebarLayout>
@@ -105,7 +105,7 @@ export default function PostPage () {
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <div style={{ width: '100%', margin: '10px auto', }}>
+                    {/* <div style={{ width: '100%', margin: '10px auto', }}>
                         <ImageWithLoader
                             src={post?.coverImage.url}
                             alt={post?.title}
@@ -113,7 +113,7 @@ export default function PostPage () {
                             className='max-h-[300px] xl:max-h-[500px]'
                             style={{ width: '100%', objectFit: 'cover', }}
                         />
-                    </div>
+                    </div> */}
                     <div className='px-6 pb-6 pt-0 markdown-content'>
                         <h1>{post?.title}</h1>
                         <HtmlContent htmlString={post?.content.html || 'Loading...'} />
