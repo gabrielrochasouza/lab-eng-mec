@@ -23,7 +23,7 @@ export default function MainPage () {
         <Layout>
             <div className='pt-16 px-8 overflow-x-hidden'>
                 <img style={{ zIndex: '-1', objectFit: 'cover', minHeight: '800px', maxWidth: '100%' }} src={ellipsis} alt='shadow ellipsis' className='absolute top-0 left-0' />
-                <div style={{ backgroundImage: `url(${grid})`, minHeight: '60vh' }} className='text-center bg-center min-h-80 flex flex-col justify-center items-center animate-in fade-in transition duration-700'>
+                <div style={{ backgroundImage: `url(${grid})`, height: '60vh', minHeight: '400px', backgroundSize: '2000px' }} className='text-center bg-center min-h-80 flex flex-col justify-center items-center animate-in fade-in transition duration-700'>
                     <span>Universidade Federal Fluminense</span>
                     <h1 className='font-bold leading-tight tracking-tighter text-3xl md:text-6xl lg:text-7xl lg:leading-[1.1] max-w-3xl'>
                         Laboratório de Mecânica Aplicada - Sala A-27

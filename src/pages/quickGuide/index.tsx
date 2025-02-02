@@ -33,7 +33,7 @@ export default function QuickGuide () {
         <Layout>
             <ScrollArea className="mt-12" style={{ height: 'calc(100vh - 48px)' }}>
                 <SidebarLayout>
-                    <div className='px-6'>
+                    <div className='px-6 animate-in fade-in transition duration-700'>
                         { postCategories.map(({ categoryName, post, id }) => (
                             <div key={id}>
                                 {post?.length && (

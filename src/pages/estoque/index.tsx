@@ -84,7 +84,7 @@ export default function Stock () {
     ];
     return (
         <Layout>
-            <div className='mt-6 pt-16 px-4 text-xs'>
+            <div className='mt-6 pt-16 px-4 text-xs animate-in fade-in transition duration-700'>
                 <Datatable rows={rows} headers={headers} tableName='Inventário' />
             </div>
             <Dialog open={openDialog} onOpenChange={(open) => setOpenDialog(open)}>

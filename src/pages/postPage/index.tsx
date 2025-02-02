@@ -92,7 +92,7 @@ export default function PostPage () {
         <Layout>
             <ScrollArea className="mt-12" style={{ height: 'calc(100vh - 48px)' }}>
                 <SidebarLayout>
-                    <Breadcrumb className='inline-block' style={{ width: 'calc(100% - 80px)' }}>
+                    <Breadcrumb className='inline-block animate-in fade-in transition duration-700' style={{ width: 'calc(100% - 80px)' }}>
                         <BreadcrumbList className='truncate'>
                             <BreadcrumbItem className='truncate'>
                                 <BreadcrumbLink className='truncate'>
@@ -114,7 +114,7 @@ export default function PostPage () {
                             style={{ width: '100%', objectFit: 'cover', }}
                         />
                     </div> */}
-                    <div className='px-6 pb-6 pt-0 markdown-content'>
+                    <div className='px-6 pb-6 pt-0 markdown-content animate-in fade-in transition duration-700'>
                         <h1>{post?.title}</h1>
                         <HtmlContent htmlString={post?.content.html || 'Loading...'} />
                     </div>
