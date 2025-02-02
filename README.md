@@ -1,3 +1,33 @@
+# Site do laboratório de mecânica aplicada da UFF Vila Volta Redonda
+
+Este projeto foi feito para criar organizar e sintetizar algumas informações relacionadas ao laboratório de mecânica aplicada da UFF.
+
+Nesse site, há uma seção com Guia Rápido, que tem como objetivo mostrar de maneira rápida e objetiva, sobre como utilizar os equipamentos do laboratório, em específico, a CNC e a máquina de ensaios mecânicos.
+
+Além disso, há uma tabela com o inventário do ítens que existem no armário, isso foi feito para manter uma controle sobre o estoque do laboratório.
+
+Além disso, há uma seção de perguntas frequentes, que visa sanar as dúvidas frequentes do laboratório.
+
+Para a gestão do conteúdo foi usado um CMS chamado hypergraph.
+
+Para acessar click no <a href="https://lab-eng-mec.vercel.app/">link</a>
+
+- Página principal
+
+<img src='./src/assets/site-lab.png' />
+
+- Guia Rápido
+
+<img src='./src/assets/posts.png' />
+
+<img src='./src/assets/post.png' />
+
+- Tabela do inventário
+
+<img src='./src/assets/tabela.png' />
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
