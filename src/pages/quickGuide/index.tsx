@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { ICategoriesResponseWithImage, IPostCategoriesWithImages } from '@/interfaces';
 import { getAllCategoriesPostsAndImages } from '@/services/api';
 import { useQuery } from '@tanstack/react-query';
+import { LoaderCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function QuickGuide () {
@@ -21,7 +22,7 @@ export default function QuickGuide () {
             <Layout>
                 <ScrollArea className="mt-12" style={{ height: 'calc(100vh - 48px)' }}>
                     <SidebarLayout>
-                        Loading...
+                        <LoaderCircle className='animate-spin' />
                     </SidebarLayout>
                 </ScrollArea>
             </Layout>

@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { Separator } from '@radix-ui/react-separator';
 import { useLocation } from 'react-router-dom';
 import ImageWithLoader from '@/components/imageWithLoader';
+import { LoaderCircle } from 'lucide-react';
 
 export default function Stock () {
     const queryParams = new URLSearchParams(window.location.search);
@@ -39,7 +40,7 @@ export default function Stock () {
     if (isLoading) {
         return (
             <Layout>
-                <div className='mt-6 pt-16 px-4 text-xs max-w-screen-2xl mx-auto'>Loading...</div>
+                <div className='mt-6 pt-16 px-4 text-xs max-w-screen-2xl mx-auto'><LoaderCircle className='animate-spin' /></div>
             </Layout>
         );
     }

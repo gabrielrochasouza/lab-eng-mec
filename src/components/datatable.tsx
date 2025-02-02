@@ -46,7 +46,7 @@ const Datatable = ({ rows, headers, tableName }: IDatatable) => {
             <Card className='mb-4'>
                 {/* Parte do filtro */}
                 <div className='mx-3 my-4 flex justify-between items-center gap-4'>
-                    <h1 className='text-2xl sm:text-1xl font-bold'>{tableName}</h1>
+                    <h1 className='text-lg font-bold'>{tableName}</h1>
                     <Input placeholder='Procurar...' className='max-w-[240px] text-xs sm:text-base' onChange={(event) => filterRows(String(event.target.value))} />
                 </div>
                 {/* Parte da tabela */}
@@ -95,7 +95,7 @@ const Datatable = ({ rows, headers, tableName }: IDatatable) => {
                 <div className='flex justify-between items-center my-0 p-4'>
                     <div className='flex items-center gap-4'>
                         <div>
-                            {currentPage} de {Math.ceil(filteredRows.length / itemsPerPage) || 1} páginas
+                            {currentPage} de {Math.ceil(filteredRows.length / itemsPerPage) || 1} páginas - Total {rows.length}
                         </div>
                     </div>
                     <div className='flex gap-2 items-center'>

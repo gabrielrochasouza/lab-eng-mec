@@ -11,7 +11,7 @@ import {
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { BookTextIcon } from 'lucide-react';
+import { BookTextIcon, LoaderCircle } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ICategoriesResponse, IPostCategories } from '@/interfaces';
 import { getAllCategoriesPosts } from '@/services/api';
@@ -30,7 +30,7 @@ export function AppSidebar() {
                 <SidebarHeader />
                 <SidebarContent className='mt-2'>
                     <ScrollArea>
-                        <div className='py-8 px-4'>Loading...</div>
+                        <div className='py-8 px-4'><LoaderCircle className='animate-spin' /></div>
                     </ScrollArea>
                 </SidebarContent>
             </Sidebar>

@@ -13,7 +13,7 @@ export default function Header({ setOpenCommand }: { setOpenCommand: (open: bool
 
     return (
         <>
-            <div className='fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-30 mx-auto'>
+            <div className='fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-transparent backdrop-blur z-30 mx-auto'>
                 <nav className='h-12 flex items-center justify-between px-4 max-w-screen-2xl mx-auto'>
                     <div className='items-center md:hidden gap-2 text-xs font-light'>
                         <Drawer>
