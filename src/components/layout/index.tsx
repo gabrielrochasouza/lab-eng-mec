@@ -25,7 +25,7 @@ export default function Layout ({children}: { children: ReactNode}) {
     const posts = stocksAndPosts?.posts;
     const stocks = stocksAndPosts?.stocks;
     return (
-        <main className='mx-auto max-w-screen-2xl'>
+        <main className='mx-auto max-w-screen-2xl relative'>
             <Header setOpenCommand={setOpenCommand} />
             <div className='min-h-80'>
                 {children}

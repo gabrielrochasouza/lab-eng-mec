@@ -26,7 +26,7 @@ Para acessar click no <a href="https://lab-eng-mec.vercel.app/">link</a>
 
 <img src='./src/assets/tabela.png' />
 
-
+<img src='./src/assets/pergunta-ia.png' />
 
 # React + TypeScript + Vite
 
