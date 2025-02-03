@@ -16,6 +16,8 @@ Para acessar click no <a href="https://lab-eng-mec.vercel.app/">link</a>
 
 <img src='./src/assets/site-lab.png' />
 
+<img src='./src/assets/site-lab-mobile.png' />
+
 - Guia Rápido
 
 <img src='./src/assets/posts.png' />
