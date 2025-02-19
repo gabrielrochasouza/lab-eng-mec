@@ -63,7 +63,7 @@ export function AppSidebar() {
                                             <SidebarMenuSub className='text-[12px] font-light'>
                                                 {post?.map(({id, title, slug}) => (
                                                     <Link key={id} to={`/guia-rapido/${slug}`}>
-                                                        <SidebarMenuSubItem className={`cursor-pointer py-2 ${slug === postSlugName ? 'text-sky-800 font-black' : ''}`}>{title}</SidebarMenuSubItem>
+                                                        <SidebarMenuSubItem className={`cursor-pointer change-color transition duration-500 py-2 ${slug === postSlugName ? 'text-sky-800 font-black' : ''}`}>{title}</SidebarMenuSubItem>
                                                     </Link>
                                                 ))}
                                             </SidebarMenuSub>
