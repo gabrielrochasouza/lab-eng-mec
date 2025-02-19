@@ -16,9 +16,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { ICategoriesResponse, IPostCategories } from '@/interfaces';
 import { getAllCategoriesPosts } from '@/services/api';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export function AppSidebar() {
+    const { postSlugName } = useParams();
     const { data: categoriesResponse, isLoading } = useQuery<ICategoriesResponse, Error>({
         queryKey: ['postCategories'],
         queryFn: getAllCategoriesPosts,
@@ -62,7 +63,7 @@ export function AppSidebar() {
                                             <SidebarMenuSub className='text-[12px] font-light'>
                                                 {post?.map(({id, title, slug}) => (
                                                     <Link key={id} to={`/guia-rapido/${slug}`}>
-                                                        <SidebarMenuSubItem className='cursor-pointer py-2'>{title}</SidebarMenuSubItem>
+                                                        <SidebarMenuSubItem className={`cursor-pointer py-2 ${slug === postSlugName ? 'text-sky-800 font-black' : ''}`}>{title}</SidebarMenuSubItem>
                                                     </Link>
                                                 ))}
                                             </SidebarMenuSub>

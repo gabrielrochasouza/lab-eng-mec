@@ -132,19 +132,19 @@ export default function PostPage () {
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <div className='flex gap-4'>
-                        <div className='px-6 pb-6 pt-0 markdown-content animate-in fade-in transition duration-700 max-w-5xl my-auto'>
+                    <div className='flex gap-0 flex-1 justify-between'>
+                        <div className='px-6 pb-6 pt-0 markdown-content animate-in fade-in transition duration-700 my-auto'>
                             <h1 id={post?.title}>{post?.title}</h1>
                             <HtmlContent htmlString={html || 'Loading...'} />
                         </div>
-                        <div className='hidden lg:block sticky top-12 flex-1 min-w-[200px] h-full'>
+                        <div className='hidden lg:block sticky top-12 min-w-[230px] h-full'>
                             {
-                                titles?.map((title) => (
-                                    <SidebarContent className='mt-1'>
-                                        <SidebarMenuSub className='text-[12px] font-light'>
-                                            <a href={`#${title}`} className='truncate mr-2 my-0'>
-                                                <SidebarMenuSubItem className='cursor-pointer py-1'>
-                                                    <div >
+                                titles?.map((title, titleIndex) => (
+                                    <SidebarContent className='mt-1' key={`${title}-${titleIndex}`}>
+                                        <SidebarMenuSub className='text-[12px] font-light change-color'>
+                                            <a href={`#${title}`} className='mr-2 my-0'>
+                                                <SidebarMenuSubItem className='cursor-pointer change-color py-1'>
+                                                    <div className='truncate change-color transition duration-500' >
                                                         {title}
                                                     </div>
                                                 </SidebarMenuSubItem>
