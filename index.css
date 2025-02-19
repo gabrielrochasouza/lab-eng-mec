@@ -149,6 +149,10 @@
     list-style-type: disc;
 }
 
+.markdown-content ol {
+  list-style-type: decimal !important;
+}
+
 .markdown-content li {
     margin-bottom: 0.5em;
 }
@@ -180,6 +184,25 @@
     height: auto;
     margin: 20px auto;
     text-align: center;
+}
+
+.markdown-content h1 a,
+.markdown-content h2 a,
+.markdown-content h3 a,
+.markdown-content h4 a,
+.markdown-content h5 a,
+.markdown-content h6 a {
+  text-decoration: none;
+  display: none;
+}
+
+.markdown-content h1:hover a,
+.markdown-content h2:hover a,
+.markdown-content h3:hover a,
+.markdown-content h4:hover a,
+.markdown-content h5:hover a,
+.markdown-content h6:hover a {
+  display: initial;
 }
 
 @media (max-width: 768px) {

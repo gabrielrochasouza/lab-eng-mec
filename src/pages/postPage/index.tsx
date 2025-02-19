@@ -13,8 +13,12 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-// import ImageWithLoader from '@/components/imageWithLoader';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+    SidebarContent,
+    SidebarMenuSub,
+    SidebarMenuSubItem,
+} from '@/components/ui/sidebar';
 
 interface HtmlContentProps {
     htmlString: string;
@@ -88,6 +92,29 @@ export default function PostPage () {
 
     const post = singlePostResponse?.post;
 
+    const addAnchorToHeadings = (html?: string) => {
+        if (!html) {
+            return;
+        }
+        const regex = /<(h[1-6])>(.*?)<\/\1>/gi;
+        return html.replace(regex, '<$1 id="$2">$2 <a href="#$2">#</a></$1>');
+    };
+
+    const getTitles = (html?: string) => {
+        if (!html) {
+            return [];
+        }
+        const regex = /<h[1-6]>(.*?)<\/h[1-6]>/g;
+        return [...html.matchAll(regex)].map(match => match[1]);
+    };
+
+    const html = addAnchorToHeadings(post?.content?.html);
+
+    const mainTitle = post?.title || '';
+
+    const titles = getTitles(post?.content?.html);
+    titles.unshift(mainTitle);
+
     return (
         <Layout>
             <ScrollArea className="mt-12" style={{ height: 'calc(100vh - 48px)' }}>
@@ -105,18 +132,28 @@ export default function PostPage () {
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
-                    {/* <div style={{ width: '100%', margin: '10px auto', }}>
-                        <ImageWithLoader
-                            src={post?.coverImage.url}
-                            alt={post?.title}
-                            sizeClassName='w-full max-h-[300px] xl:max-h-[500px]'
-                            className='max-h-[300px] xl:max-h-[500px]'
-                            style={{ width: '100%', objectFit: 'cover', }}
-                        />
-                    </div> */}
-                    <div className='px-6 pb-6 pt-0 markdown-content animate-in fade-in transition duration-700'>
-                        <h1>{post?.title}</h1>
-                        <HtmlContent htmlString={post?.content.html || 'Loading...'} />
+                    <div className='flex gap-4'>
+                        <div className='px-6 pb-6 pt-0 markdown-content animate-in fade-in transition duration-700 max-w-5xl my-auto'>
+                            <h1 id={post?.title}>{post?.title}</h1>
+                            <HtmlContent htmlString={html || 'Loading...'} />
+                        </div>
+                        <div className='hidden lg:block sticky top-12 flex-1 min-w-[200px] h-full'>
+                            {
+                                titles?.map((title) => (
+                                    <SidebarContent className='mt-1'>
+                                        <SidebarMenuSub className='text-[12px] font-light'>
+                                            <a href={`#${title}`} className='truncate mr-2 my-0'>
+                                                <SidebarMenuSubItem className='cursor-pointer py-1'>
+                                                    <div >
+                                                        {title}
+                                                    </div>
+                                                </SidebarMenuSubItem>
+                                            </a>
+                                        </SidebarMenuSub>
+                                    </SidebarContent>
+                                ))
+                            }
+                        </div>
                     </div>
                 </SidebarLayout>
             </ScrollArea>
