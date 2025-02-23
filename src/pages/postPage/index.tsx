@@ -97,7 +97,8 @@ export default function PostPage () {
             return;
         }
         const regex = /<(h[1-6])>(.*?)<\/\1>/gi;
-        return html.replace(regex, '<$1 id="$2">$2 <a href="#$2">#</a></$1>');
+        // eslint-disable-next-line quotes
+        return html.replace(regex, `<$1 id='$2'>$2 <a href='#$2'>#</a></$1>`);
     };
 
     const getTitles = (html?: string) => {
