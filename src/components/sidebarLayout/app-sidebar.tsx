@@ -60,10 +60,10 @@ export function AppSidebar() {
                                     {/* ============ Posts ============ */}
                                     <CollapsibleContent className='px-2'>
                                         {post?.length && (
-                                            <SidebarMenuSub className='text-[12px] font-light'>
+                                            <SidebarMenuSub className='text-[12px] font-light pl-0'>
                                                 {post?.map(({id, title, slug}) => (
                                                     <Link key={id} to={`/guia-rapido/${slug}`}>
-                                                        <SidebarMenuSubItem className={`cursor-pointer change-color transition duration-500 py-2 ${slug === postSlugName ? 'text-sky-800 font-black' : ''}`}>{title}</SidebarMenuSubItem>
+                                                        <SidebarMenuSubItem className={`cursor-pointer change-color transition duration-500 py-2 pl-2 ${slug === postSlugName ? 'menu-item-selected font-black' : ''}`}>{title}</SidebarMenuSubItem>
                                                     </Link>
                                                 ))}
                                             </SidebarMenuSub>

@@ -13,7 +13,6 @@ import { getStocksAndPosts } from '@/services/api';
 import { IStocksAndPosts } from '@/interfaces';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { ScrollArea } from '../ui/scroll-area';
 
 export default function Layout ({children}: { children: ReactNode}) {
     const [openCommand, setOpenCommand] = useState<boolean>(false);
@@ -32,8 +31,8 @@ export default function Layout ({children}: { children: ReactNode}) {
             </div>
             <CommandDialog open={openCommand} onOpenChange={(open) => setOpenCommand(open)} modal>
                 <CommandInput placeholder="Digite a sua busca"/>
-                <ScrollArea className='w-full h-full'>
-                    <CommandList>
+                <div className='w-full h-full'>
+                    <CommandList className='custom-scroll'>
                         <CommandEmpty>Nada encontrado.</CommandEmpty>
                         <CommandGroup heading="Guia">
                             {posts?.map(({ title, slug, id }) => (
@@ -55,7 +54,7 @@ export default function Layout ({children}: { children: ReactNode}) {
                             ))}
                         </CommandGroup>
                     </CommandList>
-                </ScrollArea>
+                </div>
             </CommandDialog>
         </main>
     );

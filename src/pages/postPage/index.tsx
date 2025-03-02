@@ -101,12 +101,21 @@ export default function PostPage () {
         return html.replace(regex, `<$1 id='$2'>$2 <a href='#$2'>#</a></$1>`);
     };
 
+    const removeString = (text: string, targetText: string, replacementText: string) => {
+        while (text.includes(targetText)) {
+            text = text.replace(targetText, replacementText);
+        }
+
+        return text;
+    };
+
     const getTitles = (html?: string) => {
         if (!html) {
             return [];
         }
         const regex = /<h[1-6]>(.*?)<\/h[1-6]>/g;
-        return [...html.matchAll(regex)].map(match => match[1]);
+        const titles = [...html.matchAll(regex)].map(match => removeString(match[1], '&quot;', '"'));
+        return titles;
     };
 
     const html = addAnchorToHeadings(post?.content?.html);
@@ -135,15 +144,16 @@ export default function PostPage () {
                     </Breadcrumb>
                     <div className='flex gap-0 flex-1 justify-between'>
                         <div className='px-6 pb-6 pt-0 markdown-content animate-in fade-in transition duration-700 my-auto'>
-                            <h1 id={post?.title}>{post?.title}</h1>
+                            <h1 id={post?.title}>{post?.title} <a href={'#' + post?.title}>#</a></h1>
                             <HtmlContent htmlString={html || 'Loading...'} />
                         </div>
                         <div className='hidden lg:block sticky top-12 min-w-[230px] h-full'>
+                            <h3 className='pl-4'>Conteúdo:</h3>
                             {
                                 titles?.map((title, titleIndex) => (
                                     <SidebarContent className='mt-1' key={`${title}-${titleIndex}`}>
                                         <SidebarMenuSub className='text-[12px] font-light change-color'>
-                                            <a href={`#${title}`} className='mr-2 my-0'>
+                                            <a href={'#' + title} className='mr-2 my-0'>
                                                 <SidebarMenuSubItem className='cursor-pointer change-color py-1'>
                                                     <div className='truncate change-color transition duration-500' >
                                                         {title}

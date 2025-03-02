@@ -253,6 +253,11 @@
   border-color: #0070f3;
 }
 
+.menu-item-selected {
+  color:#0070f3;
+  border-left: 1px solid #0070f3;
+}
+
 /* #root {
   position: relative;
 } */
